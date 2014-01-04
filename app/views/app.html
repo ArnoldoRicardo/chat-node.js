@@ -3,6 +3,7 @@
 {% block title %}App{% endblock %}
 
 {% block head %}
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>
@@ -11,9 +12,16 @@
 {% block content %}
 	<h2>Bienvenido {{ user }}</h2>
 	<a href="/log-out">Log out</a>
+	<p>Usuarios:</p>
 	<ul id="users">
 	{% for person in users %}
 		<li>{{person}}</li>
 	{% endfor %}
-	<ul>
+	</ul>
+	<div id="chat">
+	</div>
+	<form method="POST" action="/send">
+		<input name="message" type="text">
+		<button>enviar</button>
+	</form>	
 {% endblock %}

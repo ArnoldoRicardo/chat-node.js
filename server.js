@@ -5,7 +5,7 @@ var express = require('express.io'),
 var server = express();
 server.http().io();
 
-var RedisStore = require('connect-redis')(express);
+//var RedisStore = require('connect-redis')(express);
 
 var users = [];
 
@@ -76,6 +76,10 @@ server.post('/log-in', function (req, res) {
 	res.redirect('/app');
 });
 
+server.post('/send', function (req, res){
+	server.io.broadcast('send', {username: req.session.user, message: req.body.message});
+});
+
 server.get('/log-out', function (req, res) {
 	users = _.without(users, req.session.user);
 	server.io.broadcast('log-out', {username: req.session.user});
@@ -84,7 +88,7 @@ server.get('/log-out', function (req, res) {
 	res.redirect('/');
 });
 
-server.io.route('hello?', function(req){
+server.io.route('hello?', function (req){
 	req.io.emit('ready', {
 		message : 'server ready to rock!!!'
 	});

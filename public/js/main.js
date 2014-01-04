@@ -17,6 +17,12 @@ $(document).ready(function(){
 		$('#users').append('<li>'+data.username+'</li>');
 	});
 
+	io.on('send', function(data){
+		console.log(data);
+
+		$('#chat').append(data.username+': '+data.message+'<hr />');
+	});
+
 	io.on('log-out', function(data){
 		console.log(data);
 
