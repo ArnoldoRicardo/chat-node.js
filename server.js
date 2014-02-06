@@ -88,7 +88,7 @@ server.get('/log-out', function (req, res) {
 	res.redirect('/');
 });
 
-server.io.route('hello?', function (req){
+server.io.route('hello?', function(req){
 	req.io.emit('ready', {
 		message : 'server ready to rock!!!'
 	});
